@@ -37,7 +37,7 @@ public class App {
 
         executor.shutdown();
 
-        System.out.println("All task submitted.");
+        System.out.println("All tasks submitted.");
 
         try {
             executor.awaitTermination(1, TimeUnit.DAYS);
