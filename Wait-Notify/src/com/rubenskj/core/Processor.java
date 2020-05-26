@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class Processor {
 
+    private Object lock = new Object();
+
     public void produce() throws InterruptedException {
-        synchronized (this) {
+        synchronized (lock) {
             System.out.println("Producer thread running...");
-            wait();
+            lock.wait();
             System.out.println("Resumed.");
         }
     }
@@ -17,11 +19,11 @@ public class Processor {
         Scanner scanner = new Scanner(System.in);
         Thread.sleep(2000);
 
-        synchronized (this) {
+        synchronized (lock) {
             System.out.println("Waiting for return key.");
             scanner.nextLine();
             System.out.println("Return key pressed.");
-            notify();
+            lock.notify();
             Thread.sleep(5000);
         }
     }
